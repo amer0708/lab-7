@@ -29,7 +29,7 @@
         <url-pattern>/add_movie.do</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>SuccessServlet</servlet-name>
+    <servlet-name>SuccessServlet</servlet-name>
         <url-pattern>/success.view</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
