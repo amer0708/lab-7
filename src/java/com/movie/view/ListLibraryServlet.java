@@ -1,70 +1,117 @@
 package com.movie.view;
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.movie.model.MovieItem;
-@WebServlet(name = "ListLibraryServlet", urlPatterns = {"/list_library.view"})
-public class ListLibraryServlet extends HttpServlet {
 
+import java.util.List;
+import java.util.Iterator;
+import java.util.ArrayList;
+import com.movie.model.MovieItem;
+
+/**
+ *
+ * @author user
+ */
+public class ListLibraryServlet extends HttpServlet {
+    
+    
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        List movies=new ArrayList();
+            movies.add(new MovieItem("Spiderman","2022","Action"));
+            movies.add(new MovieItem("Barbie","2023","Comedy"));
+            movies.add(new MovieItem("Conjuring","2023","Horror"));
+        
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            List<MovieItem> movies = new ArrayList<>();
-            movies.add(new MovieItem("Spiderman No Way Home", "2022", "Action"));
-            movies.add(new MovieItem("Avengers", "2022", "Action"));
-            movies.add(new MovieItem("Maleficient", "2022", "Action"));
-
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>ListLibraryServlet</title>");
+            out.println("<title>ListLibraryServlet</title>");            
             out.println("</head>");
-            out.println("<body bgcolor='white'>");
-            out.println("You currently have <b>" + movies.size() + "</b> Movies in your collection:<br>");
-            out.println("<table border='0' cellspacing='0' cellpadding='5'>");
+            out.println("<body style=\"background-color:pink\">");
+            out.println("<h3>You currently have <b>"+movies.size()+"</b> in your collection</h3>");
+            out.println("<table>");
+            
             out.println("<tr>");
-            out.println("<th>TITLE</th>");
-            out.println("<th>YEAR</th>");
-            out.println("<th>GENRE</th>");
+            out.println("   <th>Movie Name</th>");
+            out.println("   <th>Year</th>");
+            out.println("   <th>Genre</th>");
             out.println("</tr>");
-
-            Iterator<MovieItem> it = movies.iterator();
-            while (it.hasNext()) {
-                MovieItem item = it.next();
+            
+            Iterator it = movies.iterator();
+            while(it.hasNext()){
+                MovieItem item = (MovieItem) it.next();
                 out.println("<tr>");
-                out.println("<td>" + item.getTitle() + "</td>");
-                out.println("<td>" + item.getYear() + "</td>");
-                out.println("<td>" + item.getGenre() + "</td>");
+                out.println("   <td>"+item.getTitle()+"</td>");
+                out.println("   <td>"+item.getYear()+"</td>");
+                out.println("   <td>"+item.getYear()+"</td>");
                 out.println("</tr>");
             }
             out.println("</table>");
-            out.println("End of list...");
             out.println("</body>");
             out.println("</html>");
         }
     }
 
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
     @Override
     public String getServletInfo() {
         return "Short description";
-    }
+    }// </editor-fold>
+
 }
